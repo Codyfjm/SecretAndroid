@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
 			startActivity(new Intent(this,AtyLogin.class));
 		}
         
+        
         finish();
     }
 }
