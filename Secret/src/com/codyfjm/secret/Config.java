@@ -5,7 +5,8 @@ import android.content.SharedPreferences.Editor;
 
 public class Config {
 	
-	public static final String SERVER_URL = "http://demo.eoeschool.com/api/v1/nimings/io";
+//	public static final String SERVER_URL = "http://demo.eoeschool.com/api/v1/nimings/io";
+	public static final String SERVER_URL = "http://192.168.31.144:8080/TestServer/api.jsp";
 	
 	public static final String KEY_TOKEN = "token";
 	public static final String KEY_ACTION = "action";
