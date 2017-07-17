@@ -4,8 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.R.integer;
-
 import com.codyfjm.secret.Config;
 
 public class Timeline {

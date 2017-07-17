@@ -2,7 +2,6 @@ package com.codyfjm.secret.atys;
 
 import com.codyfjm.secret.R;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
 
