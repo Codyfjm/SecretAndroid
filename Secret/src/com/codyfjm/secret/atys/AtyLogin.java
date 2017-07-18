@@ -74,10 +74,14 @@ public class AtyLogin extends Activity {
 					return;
 				}
 				
+				final ProgressDialog pdDialog = ProgressDialog.show(AtyLogin.this, "链接中","连接到服务器，请等待");
 				new Login(MD5Tool.md5(etPhone.getText().toString()), etCode.getText().toString(), new Login.SuccessCallback() {
 					
 					@Override
 					public void onSuccess(String token) {
+						
+						pdDialog.dismiss();
+						
 						Config.cacheToken(AtyLogin.this, token);
 						Config.cachePhoneNum(AtyLogin.this, etPhone.getText().toString());
 						
@@ -92,6 +96,7 @@ public class AtyLogin extends Activity {
 					
 					@Override
 					public void onFail() {
+						pdDialog.dismiss();
 						Toast.makeText(AtyLogin.this, "登录失败，请重新登陆！", Toast.LENGTH_LONG).show();
 					}
 				});

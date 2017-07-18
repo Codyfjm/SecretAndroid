@@ -1,5 +1,8 @@
 package com.codyfjm.secret.net;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +24,16 @@ public class Timeline {
 					switch (obj.getInt(Config.KEY_STATUS)) {
 					case Config.RESULT_STATUS_SUCCESS:
 						if (successCallback!=null) {
-							successCallback.onSuccess(obj.getInt(Config.KEY_PAGE), obj.getInt(Config.KEY_PREPAGE), obj.getJSONArray(Config.KEY_TIMELINE));
+							
+							List<Message> msgs = new ArrayList<Message>();
+							JSONArray msgJsonArray = obj.getJSONArray(Config.KEY_TIMELINE);
+							JSONObject msgObj;
+							for (int i = 0; i < msgJsonArray.length(); i++) {
+								msgObj = msgJsonArray.getJSONObject(i);
+								msgs.add(new Message(msgObj.getString(Config.KEY_MSG_ID),msgObj.getString(Config.KEY_MSG),msgObj.getString(Config.KEY_PHONE_MD5)));
+							}
+							
+							successCallback.onSuccess(obj.getInt(Config.KEY_PAGE), obj.getInt(Config.KEY_PREPAGE), msgs);
 						}
 						break;
 
@@ -55,7 +67,7 @@ public class Timeline {
 	}
 	
 	public static interface SuccessCallback{
-		void onSuccess(int page,int prepage,JSONArray timeline);
+		void onSuccess(int page,int prepage,List<Message> timeline);
 	}
 	
 	public static interface FailCallback{
