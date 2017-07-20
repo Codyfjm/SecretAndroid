@@ -1,13 +1,12 @@
 package com.codyfjm.secret.atys;
 
 import java.util.List;
-
-import org.json.JSONArray;
-
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.codyfjm.secret.Config;
@@ -83,6 +82,18 @@ public class AtyTimeline extends ListActivity {
 				Toast.makeText(AtyTimeline.this, "加载消息失败，请稍后重试！", Toast.LENGTH_LONG).show();
 			}	
 		});
-		
+	}
+	
+	//点击每一项的事件
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+		 
+		Message msg = (Message) adapter.getItem(position);
+		Intent intent = new Intent(this,AtyMessage.class);
+		intent.putExtra(Config.KEY_MSG, msg.getMsg());
+		intent.putExtra(Config.KEY_MSG_ID, msg.getMsgId());
+		intent.putExtra(Config.KEY_PHONE_MD5, msg.getPhone_md5());
+		startActivity(intent);
 	}
 }

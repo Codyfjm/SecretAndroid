@@ -39,7 +39,7 @@ public class AtyTimelineMessageListAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View converView, ViewGroup parent) {
-		if (converView!=null) {
+		if (converView==null) {
 			converView = LayoutInflater.from(getContext()).inflate(R.layout.aty_timeline_list_cell, null);
 			
 			
