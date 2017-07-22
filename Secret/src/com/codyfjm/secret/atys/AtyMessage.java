@@ -19,11 +19,15 @@ public class AtyMessage extends ListActivity {
 	
 	private String phone_md5,msg,msgId,token;
 	private TextView tvMessage;
+	private AtyMessageCommentListAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.aty_message);
+		
+		adapter = new AtyMessageCommentListAdapter(this);
+		setListAdapter(adapter);
 		
 		tvMessage = (TextView) findViewById(R.id.tvMessage);
 		
@@ -42,6 +46,8 @@ public class AtyMessage extends ListActivity {
 			public void onSuccess(String msgId, int page, int perpage,
 					List<Comment> comments) {
 				pdDialog.dismiss();
+				
+				adapter.addAll(comments);
 				
 			}
 		}, new GetComment.FailCallback() {

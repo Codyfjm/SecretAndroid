@@ -35,6 +35,7 @@ public class Config {
 	public static final String ACTON_UPLOAD_CONTACTS = "upload_contacts";
 	public static final String ACTION_TIMELINE = "timeline";
 	public static final String ACTION_GET_COMMENT = "get_comment";
+	public static final String ACTION_PUB_COMMENT = "pub_comment";
 	
 	
 	public static String getCachedToken(Context context) {
