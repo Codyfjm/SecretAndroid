@@ -1,16 +1,23 @@
 package com.codyfjm.secret.atys;
 
+import java.util.List;
+
 import com.codyfjm.secret.Config;
 import com.codyfjm.secret.R;
+import com.codyfjm.secret.net.Comment;
+import com.codyfjm.secret.net.GetComment;
+import com.codyfjm.secret.net.GetComment.FailCallback;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AtyMessage extends ListActivity {
 	
-	private String phone_md5,msg,msgId;
+	private String phone_md5,msg,msgId,token;
 	private TextView tvMessage;
 
 	@Override
@@ -22,10 +29,35 @@ public class AtyMessage extends ListActivity {
 		
 		Intent data=getIntent();
 		phone_md5 = data.getStringExtra(Config.KEY_PHONE_MD5);
-		msg = data.getStringExtra(Config.KEY_MSG);
 		msgId = data.getStringExtra(Config.KEY_MSG_ID); 
+		msg = data.getStringExtra(Config.KEY_MSG);
+		token = data.getStringExtra(Config.KEY_TOKEN);
 		
 		tvMessage.setText(msg);
+		
+		final ProgressDialog pdDialog = ProgressDialog.show(AtyMessage.this, "链接中","连接到服务器，请等待");
+		new GetComment(phone_md5, token, msgId, 1, 20, new GetComment.SuccessCallback() {
+			
+			@Override
+			public void onSuccess(String msgId, int page, int perpage,
+					List<Comment> comments) {
+				pdDialog.dismiss();
+				
+			}
+		}, new GetComment.FailCallback() {
+			
+			@Override
+			public void onFail(int errorCode) {
+				pdDialog.dismiss();
+
+				if (errorCode==Config.RESULT_STATUS_INVALID_TOKEN) {
+					startActivity(new Intent(AtyMessage.this,AtyLogin.class));
+					finish();
+				}else {
+					Toast.makeText(AtyMessage.this, "加载评论失败，请重新登陆",Toast.LENGTH_LONG).show();
+				}
+			}
+		});
 		
 		
 	}

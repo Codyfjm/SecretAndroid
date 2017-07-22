@@ -36,10 +36,16 @@ public class Timeline {
 							successCallback.onSuccess(obj.getInt(Config.KEY_PAGE), obj.getInt(Config.KEY_PREPAGE), msgs);
 						}
 						break;
+						
+					case Config.RESULT_STATUS_INVALID_TOKEN :
+						if (failCallback!=null) {
+							failCallback.onFail(Config.RESULT_STATUS_INVALID_TOKEN);
+						}
+						break;
 
 					default:
 						if (failCallback!=null) {
-							failCallback.onFail();
+							failCallback.onFail(Config.RESULT_STATUS_INVALID_TOKEN);
 						}
 						break;
 					}
@@ -47,7 +53,7 @@ public class Timeline {
 					e.printStackTrace();
 					
 					if (failCallback!=null) {
-						failCallback.onFail();
+						failCallback.onFail(Config.RESULT_STATUS_INVALID_TOKEN);
 					}
 				}
 			
@@ -57,7 +63,7 @@ public class Timeline {
 			@Override
 			public void onFail() {
 				if(failCallback!=null){
-					failCallback.onFail();
+					failCallback.onFail(Config.RESULT_STATUS_INVALID_TOKEN);
 				}
 			}
 		}, Config.KEY_ACTION,Config.ACTION_TIMELINE,
@@ -71,6 +77,6 @@ public class Timeline {
 	}
 	
 	public static interface FailCallback{
-		void onFail();
+		void onFail(int errorCode);
 	}
 }

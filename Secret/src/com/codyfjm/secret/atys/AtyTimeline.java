@@ -77,9 +77,15 @@ public class AtyTimeline extends ListActivity {
 		}, new Timeline.FailCallback() {
 			
 			@Override
-			public void onFail() {
+			public void onFail(int errorCode) {
 				pdDialog.dismiss();
-				Toast.makeText(AtyTimeline.this, "加载消息失败，请稍后重试！", Toast.LENGTH_LONG).show();
+				
+				if (errorCode==Config.RESULT_STATUS_INVALID_TOKEN) {
+					startActivity(new Intent(AtyTimeline.this, AtyLogin.class));
+					finish();
+				}else {
+					Toast.makeText(AtyTimeline.this, "加载消息失败，请稍后重试！", Toast.LENGTH_LONG).show();
+				}
 			}	
 		});
 	}
@@ -94,6 +100,7 @@ public class AtyTimeline extends ListActivity {
 		intent.putExtra(Config.KEY_MSG, msg.getMsg());
 		intent.putExtra(Config.KEY_MSG_ID, msg.getMsgId());
 		intent.putExtra(Config.KEY_PHONE_MD5, msg.getPhone_md5());
+		intent.putExtra(Config.KEY_TOKEN, token);
 		startActivity(intent);
 	}
 }

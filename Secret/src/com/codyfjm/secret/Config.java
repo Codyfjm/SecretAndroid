@@ -19,6 +19,8 @@ public class Config {
 	public static final String KEY_TIMELINE = "timeline";
 	public static final String KEY_MSG_ID = "msgId";
 	public static final String KEY_MSG = "msg";
+	public static final String KEY_COMMENT = "comments";
+	public static final String KEY_CONTENT = "content";
 	
 	public static final int RESULT_STATUS_SUCCESS = 1;
 	public static final int RESULT_STATUS_FAIL = 0;
@@ -32,6 +34,7 @@ public class Config {
 	public static final String ACTION_LOGIN = "login";
 	public static final String ACTON_UPLOAD_CONTACTS = "upload_contacts";
 	public static final String ACTION_TIMELINE = "timeline";
+	public static final String ACTION_GET_COMMENT = "get_comment";
 	
 	
 	public static String getCachedToken(Context context) {
