@@ -26,6 +26,9 @@ public class Config {
 	public static final int RESULT_STATUS_FAIL = 0;
 	public static final int RESULT_STATUS_INVALID_TOKEN = 2;
 	
+	
+	public static final int ACTIVITY_RESULT_NEED_REFRESH = 10000;
+	
 	public static final String APP_ID = "com.codyfjm.secret";
 
 	public static final String CHARSET = "utf-8";
@@ -36,6 +39,7 @@ public class Config {
 	public static final String ACTION_TIMELINE = "timeline";
 	public static final String ACTION_GET_COMMENT = "get_comment";
 	public static final String ACTION_PUB_COMMENT = "pub_comment";
+	public static final String ACTION_PUBLISH = "publish";
 	
 	
 	public static String getCachedToken(Context context) {
